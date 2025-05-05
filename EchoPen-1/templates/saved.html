@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .book-card {
+            background-color: #acf3ea;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            width: 600px;
+            text-align: center;
+        }
+        .book-card a {
+            text-decoration: none;
+            color: #333;
+            
+        }
+    
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">📚 Your Saved Storybooks</h1>
+    <div class="book-list">
+        {% for book in books %}
+        <div class="book-card">
+            <p><strong>{{ book }}</strong></p>
+            <a href="{{ url_for('download', filename=book) }}">⬇️ Download</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="text-align:center; margin-top:30px;">
+        <a href="/home">🏠 Back to Home</a>
+    </div>
+</body>
+</html>
