@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Echo Pen - Create Your Story</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #cfe9e6;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #bdefea;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #74dfda;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #00e0d1;
+        }
+
+        a.nav-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a.nav-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Echo Pen Story Creator</h1>
+        <form action="/generate" method="POST" enctype="multipart/form-data" id="storyForm">
+            <label>Hero Name:</label>
+            <input type="text" name="hero" id="hero" required>
+
+            <label>Villain Name:</label>
+            <input type="text" name="villain" id="villain" required>
+
+            <label>Nature of Story:</label>
+            <select name="nature" id="nature" required>
+                <option>Adventure</option>
+                <option>Fantasy</option>
+                <option>Comedy</option>
+                <option>Friendship</option>
+                <option>Drama</option>
+            </select>
+
+            <label>Side Characters:</label>
+            <input type="text" name="side" id="side" placeholder="Optional side characters">
+
+            <label>Upload Voice File (optional):</label>
+            <input type="file" name="voice" id="voice" accept="audio/*">
+
+            <button type="submit">Generate Story</button>
+        </form>
+        <a class="nav-link" href="/books/view">📚 View Saved Books</a>
+    </div>
+
+    <script>
+        document.getElementById("voice").addEventListener("change", function () {
+            const isVoiceProvided = this.files.length > 0;
+            const formFields = ["hero", "villain", "nature"];
+            formFields.forEach(id => {
+                document.getElementById(id).required = !isVoiceProvided;
+            });
+        });
+    </script>
+</body>
+</html>
